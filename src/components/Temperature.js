@@ -8,8 +8,8 @@ class Temperature extends Component {
 			<div className="temperature">
 			Temperaturen är: <strong>{this.props.temperature} grader</strong> <br/>
 			<button onClick={this.handleClickRaise}>Höj</button>
-			<button>Sänk</button>
-			<button onClick={this.handleUndo}>Ångra</button>
+			<button onClick={this.handleClickLower}>Sänk</button>
+			<button onClick={this.handleUndo} disabled={!this.props.canUndo}>Ångra temperatur</button>
 			</div>
 		);
 	}
@@ -20,10 +20,16 @@ class Temperature extends Component {
 		let action = actionRaiseTemperature();
 		this.props.dispatch(action);
 	}
+	handleClickLower = event => {
+		console.log('handleClickLower');
+		let action = actionLowerTemperature();
+		this.props.dispatch(action);
+	}
 }
 let mapStateToProps = state => {
 	return {
-		temperature: state.temperature.present
+		temperature: state.temperature.present,
+		canUndo: state.temperature.past.length >= 1
 	};
 }
 export default connect(mapStateToProps)(Temperature);

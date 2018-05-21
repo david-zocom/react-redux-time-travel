@@ -1,10 +1,33 @@
-import {RAISE_TEMP, LOWER_TEMP, UNDO} from './constants.js';
+import {RAISE_TEMP, LOWER_TEMP, UNDO, REDO, ADD_FURNITURE, UNDO_FURNITURE, REDO_FURNITURE} from './constants.js';
 
 let actionUndo = () => {
 	return {
 		type: UNDO
 	};
 }
+let actionRedo = () => {
+	return {
+		type: REDO
+	};
+}
+let actionUndoF = () => {
+	return {
+		type: UNDO_FURNITURE
+	};
+}
+let actionRedoF = () => {
+	return {
+		type: REDO_FURNITURE
+	};
+}
+
+let actionAddFurniture = (o) => {
+	return {
+		type: ADD_FURNITURE,
+		furniture: o
+	};
+}
+
 let actionRaiseTemperature = (amount=1) => {
 	return {
 		type: RAISE_TEMP,
@@ -19,4 +42,7 @@ let actionLowerTemperature = (amount=1) => {
 }
 
 export {actionRaiseTemperature, actionLowerTemperature,
-	actionUndo};
+	actionUndo, actionRedo, actionAddFurniture, actionUndoF, actionRedoF};
+
+
+//
